@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+        font-weight: 400;
+      }
+      h1 {
+        margin: 0;
+      }
+      .main-container {
+        height: 100vh;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        background: #222222;
+        color: #fff;
+        height: 5%;
+        font-size: 13px;
+      }
+      header > div {
+        padding: 20px 40px;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 95%;
+      }
+      .container-inner {
+        width: 50%;
+
+        height: 50%;
+        padding: 20px;
+      }
+      .container-logo {
+        padding: 20px 0;
+      }
+      .create-task-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .input-container {
+        width: 70%;
+      }
+      .create-task-container input {
+        width: 90%;
+        padding: 10px;
+      }
+
+      .task-list {
+        margin-top: 20px;
+        border: 1px solid #888;
+        border-radius: 15px;
+      }
+
+      .task-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .completed label {
+        text-decoration: line-through;
+        color: #888;
+      }
+    </style>
+    <script>
+      // Function to add a new task
+      function addTask() {
+        var input = document.getElementById("taskInput");
+        var taskList = document.getElementById("taskList");
+        var taskText = input.value.trim();
+
+        if (taskText !== "") {
+          var taskItem = document.createElement("div");
+          taskItem.className = "todo-item";
+          taskItem.innerHTML = `
+                    <input type="checkbox" onchange="toggleTaskCompletion(this)">
+                    <label>${taskText}</label>
+                    <button onclick="deleteTask(this)">Delete</button>
+                `;
+          taskList.appendChild(taskItem);
+          input.value = ""; // Clear the input field after adding task
+        }
+      }
+
+      // Function to toggle task completion
+      function toggleTaskCompletion(checkbox) {
+        var label = checkbox.nextElementSibling;
+        if (checkbox.checked) {
+          label.parentElement.classList.add("completed");
+        } else {
+          label.parentElement.classList.remove("completed");
+        }
+      }
+
+      // Function to delete a task
+      function deleteTask(button) {
+        button.parentElement.remove();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <div>
+          <h1>ToDo List</h1>
+        </div>
+      </header>
+      <div class="container">
+        <div class="container-inner">
+          <div class="container-logo">
+            <h1>ToDo List</h1>
+          </div>
+          <div class="create-task-container">
+            <div class="input-container">
+              <input type="text" placeholder="New Task" id="taskInput" />
+              <!-- <h1>test</h1> -->
+            </div>
+            <div>
+              <button onclick="addTask()">Add</button>
+            </div>
+          </div>
+          <div class="task-list">
+            <div id="taskList">
+              <!-- Tasks will be added here dynamically -->
+            </div>
+            <div class="task-item">
+              <div>
+                <input type="checkbox" name="" id="" />
+                <h3>task name</h3>
+              </div>
+              <div>
+                <button>delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
